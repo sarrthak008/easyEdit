@@ -12,6 +12,7 @@ let seetingPannel = document.getElementById("setting-pannel")
 let loaderBody = document.getElementById("loader")
 
 
+
 // all image control setting
 
 let brightness = document.getElementById("Brightness")
@@ -94,3 +95,36 @@ blurr.addEventListener("change",()=>{
 setTimeout(()=>{
     loaderBody.style.display="none"
 },5000)
+
+/// getiing all filters 
+
+ let filters = document.getElementsByClassName("filters")
+  
+   for(let filter of filters){
+
+     filter.addEventListener("click",()=>{
+         let att = filter.getAttribute("class").split(" ")[1]
+            mainEditableImg.setAttribute("class",att)
+     }) 
+
+   }
+
+
+   let obj = {
+      name:"sarthak",
+      age:20
+   }
+
+   // object -> JSON 
+
+   let newJson = JSON.stringify(obj)
+
+   console.log(newJson)
+
+   // JSON -> object 
+
+
+   let OBJAGAIN = JSON.parse(newJson)
+
+   console.log(OBJAGAIN)
+
