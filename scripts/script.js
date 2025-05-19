@@ -9,6 +9,7 @@ let imgUploader = document.getElementById("image-uploader")
 let pannerSettingHandeler = document.getElementById("panner-setting-handeler")
 let settingMainPannel = document.getElementById("settings")
 let seetingPannel = document.getElementById("setting-pannel")
+let loaderBody = document.getElementById("loader")
 
 
 // all image control setting
@@ -84,3 +85,12 @@ sepia.addEventListener("change",()=>{
 blurr.addEventListener("change",()=>{
     mainEditableImg.style.filter = `blur(${blurr.value}px)`
 })
+
+
+
+
+//setTimeOut
+
+setTimeout(()=>{
+    loaderBody.style.display="none"
+},5000)
