@@ -227,6 +227,7 @@ html {
     top: 0;
     left: 0;
     background-color: #1b1a1a;
+        display: none;
 
 }
 
@@ -325,4 +326,28 @@ html {
     100%{
         width: 100%;
     }
+}
+
+
+#notificationBar{
+    position: absolute;
+    height: 50px;
+    width: 320px;
+     background: rgba(18, 18, 18, 0.81);
+    box-shadow: 0 8px 32px 0 rgba(223, 224, 247, 0.044);
+    backdrop-filter: blur(2px);
+    bottom: 10%;
+    border-radius: 14px;
+    border-right: 10px solid blue;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 2px;
+    left:-100%;
+    transition: all 1s ease-in-out;
+}
+
+#notificationBar h3{
+    font-size: 1.3em;
+    color: #ffffffbb;
 }

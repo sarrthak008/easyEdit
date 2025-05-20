@@ -11,6 +11,35 @@ let settingMainPannel = document.getElementById("settings")
 let seetingPannel = document.getElementById("setting-pannel")
 let loaderBody = document.getElementById("loader")
 
+let notificationBar = document.getElementById("notificationBar")
+let notificationText = document.getElementById("notificationText")
+
+
+// notification function
+
+ 
+const notification =(text="deafult message",time=1000,type = "success")=>{
+    
+    notificationBar.style.left = "-1%"
+    notificationText.innerText = text
+    
+    if(type == "success"){
+        
+        notificationBar.style.borderRight = "10px solid green"
+        
+     }else{
+         notificationBar.style.borderRight = "10px solid red"
+     }
+
+   
+    setTimeout(()=>{
+        notificationBar.style.left = "-100%"
+    },time)
+
+}
+
+
+
 
 
 // all image control setting
@@ -43,47 +72,47 @@ inputImage.addEventListener("change", () => {  // add event on input file
 
 //open setting pannel 
 
-pannerSettingHandeler.addEventListener("click",()=>{
+pannerSettingHandeler.addEventListener("click", () => {
     settingMainPannel.style.display = "block"
 
 })
 
-settingMainPannel.addEventListener("click",()=>{
+settingMainPannel.addEventListener("click", () => {
     settingMainPannel.style.display = "none"
 })
 
-seetingPannel.addEventListener("click",(e)=>{
+seetingPannel.addEventListener("click", (e) => {
     e.stopPropagation()
 })
 
 // setting events
 
-brightness.addEventListener("change",()=>{
+brightness.addEventListener("change", () => {
     mainEditableImg.style.filter = `brightness(${brightness.value - 10})`
 })
 
-contrast.addEventListener("change",()=>{
+contrast.addEventListener("change", () => {
     mainEditableImg.style.filter = `contrast(${contrast.value})`
 })
 
-saturation.addEventListener("change",()=>{
+saturation.addEventListener("change", () => {
     mainEditableImg.style.filter = `saturate(${saturation.value})`
 
 })
 
-grayscale.addEventListener("change",()=>{
+grayscale.addEventListener("change", () => {
     mainEditableImg.style.filter = `grayscale(${grayscale.value})`
 })
 
-invert.addEventListener("change",()=>{
+invert.addEventListener("change", () => {
     mainEditableImg.style.filter = `invert(${invert.value})`
 })
 
-sepia.addEventListener("change",()=>{
+sepia.addEventListener("change", () => {
     mainEditableImg.style.filter = `sepia(${sepia.value})`
 })
 
-blurr.addEventListener("change",()=>{
+blurr.addEventListener("change", () => {
     mainEditableImg.style.filter = `blur(${blurr.value}px)`
 })
 
@@ -92,39 +121,22 @@ blurr.addEventListener("change",()=>{
 
 //setTimeOut
 
-setTimeout(()=>{
-    loaderBody.style.display="none"
-},5000)
+setTimeout(() => {
+    loaderBody.style.display = "none"
+}, 5000)
 
 /// getiing all filters 
 
- let filters = document.getElementsByClassName("filters")
-  
-   for(let filter of filters){
+let filters = document.getElementsByClassName("filters")
 
-     filter.addEventListener("click",()=>{
-         let att = filter.getAttribute("class").split(" ")[1]
-            mainEditableImg.setAttribute("class",att)
-     }) 
+for (let filter of filters) {
 
-   }
+    filter.addEventListener("click", () => {
+        let att = filter.getAttribute("class").split(" ")[1]
+        mainEditableImg.setAttribute("class", att)
+        notification("filter applied successfully",2000,"success");
+    })
 
+}
 
-   let obj = {
-      name:"sarthak",
-      age:20
-   }
-
-   // object -> JSON 
-
-   let newJson = JSON.stringify(obj)
-
-   console.log(newJson)
-
-   // JSON -> object 
-
-
-   let OBJAGAIN = JSON.parse(newJson)
-
-   console.log(OBJAGAIN)
 
