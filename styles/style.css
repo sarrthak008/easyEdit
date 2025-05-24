@@ -227,7 +227,6 @@ html {
     top: 0;
     left: 0;
     background-color: #1b1a1a;
-        display: none;
 
 }
 
@@ -350,4 +349,34 @@ html {
 #notificationBar h3{
     font-size: 1.3em;
     color: #ffffffbb;
+}
+
+#random-img-container{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    backdrop-filter: blur(2px);
+    background: rgba(18, 18, 18, 0.81);
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y:scroll;
+    gap:14px;
+
+}
+
+.random-img-div{
+    height: 150px;
+    width: 200px;
+    overflow: hidden;
+}
+
+.random-img-div img{
+    height: 100%;
+    width: 100%;
+    object-fit:fill;
 }

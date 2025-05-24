@@ -14,6 +14,11 @@ let loaderBody = document.getElementById("loader")
 let notificationBar = document.getElementById("notificationBar")
 let notificationText = document.getElementById("notificationText")
 
+let ranDomImgContainer = document.getElementById("random-img-container")
+let randomsettingHeader = document.getElementById("random-img-header")
+
+let exportBtn =  document.getElementById("export-btn")
+let deleteBtn = document.getElementById("delete")
 
 // notification function
 
@@ -38,6 +43,22 @@ const notification =(text="deafult message",time=1000,type = "success")=>{
 
 }
 
+const loadLocalImg=()=>{
+     let imgUrl = localStorage.getItem("IMG_URL")
+    // console.log(imgUrl)
+    if(imgUrl){
+        mainEditableImg.src = imgUrl
+        imgUploader.style.display = "none"
+        imgContainer.style.display = "block"
+
+    }else{
+         notification("old image not found",2000,"error")
+    }
+
+}
+
+document.addEventListener("DOMContentLoaded",loadLocalImg)
+
 
 
 
@@ -52,6 +73,7 @@ let invert = document.getElementById("Invert")
 let sepia = document.getElementById("Sepia")
 let blurr = document.getElementById("Blur")
 
+
 // functions 
 
 
@@ -62,8 +84,11 @@ inputImage.addEventListener("change", () => {  // add event on input file
 
     let imgObj = inputImage.files[0]
     if (!imgObj) return  // .file[0]
-    let imgUrl = URL.createObjectURL(imgObj)  // URL.createObj()
+    let imgUrl = URL.createObjectURL(imgObj) 
+     // URL.createObj()
+     localStorage.setItem("IMG_URL",imgUrl)
     mainEditableImg.src = imgUrl
+
 
     imgUploader.style.display = "none"
     imgContainer.style.display = "block"
@@ -140,3 +165,50 @@ for (let filter of filters) {
 }
 
 
+async function loadData() {
+   let responce = await fetch("https://picsum.photos/v2/list")
+   let data = await responce.json()
+   return data
+}
+
+
+
+
+
+
+
+randomsettingHeader.addEventListener("click",async ()=>{
+      ranDomImgContainer.style.display ="flex"
+      let images = await loadData()
+      
+    let randomImageDivs = ""
+
+       for(let imageInfo of images){
+          let imgUrl = imageInfo.download_url
+          
+          randomImageDivs += `<div class="random-img-div" onclick='handelChangeImage("${imgUrl}")'>
+            <img src=${imageInfo.download_url} class="img"> 
+          </div>`
+       }
+
+       ranDomImgContainer.innerHTML = randomImageDivs
+       notification("images load sucessfully",2000,"success")      
+})
+
+
+function handelChangeImage(url){
+    mainEditableImg.src = url
+    localStorage.setItem("IMG_URL",url)
+    ranDomImgContainer.style.display ="none"
+    notification("image changed sucessfully",2000,"success")
+}
+
+exportBtn.addEventListener("click", () => {
+    exportBtn.setAttribute("href",mainEditableImg.src);
+    exportBtn.setAttribute("download", "edited-image.jpg"); // Give it a filename
+});
+
+deleteBtn.addEventListener("click",()=>{
+     localStorage.clear()
+     loadLocalImg()
+})
